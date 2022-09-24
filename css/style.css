@@ -1,0 +1,20 @@
+.carousel-item{
+    height: 40vh;
+    background: rgb(102, 139, 160);
+    color:white;
+    position:relative;
+}
+.container{
+    position:absolute;
+    top:50%;
+    left:50%;
+    transform:translate(-50%,-50%);
+    text-align:center;
+}
+main{
+    height:60vh;
+    background: rgb(109, 142, 161);
+}
+.filter_white{
+    filter: invert(100%);
+}
