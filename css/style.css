@@ -1,5 +1,6 @@
 .carousel-item{
     height: 40vh;
+    min-height: 23rem;
     background: rgb(79, 93, 117);
     color:white;
     position:relative;
