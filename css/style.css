@@ -13,7 +13,7 @@
     text-align:center;
 }
 main{
-    height:94vh;
+    min-height:94vh;
     background: rgb(191, 192, 192);
 }
 html{
@@ -26,9 +26,16 @@ html{
 .grid_container{
     margin-top:2rem;
     display:grid;
-    grid-template-columns: repeat(3,1fr);
+    grid-template-columns: repeat(5,1fr);
     grid-gap: 10px;
     padding: 10px;
     justify-items: center;
 }
-
+.form_container{
+    margin-top:5rem;
+    display:grid;
+    grid-template-columns: repeat(2,1fr);
+    grid-gap: 10px;
+    padding: 10px;
+    justify-items: center;
+}
