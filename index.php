@@ -3,10 +3,16 @@ session_start();
 
 if(empty($_SESSION['cart'])){
     $_SESSION['cart'] = array();
-    header("Location: index.php");
 }
 
-array_push($_SESSION['cart'], $_GET['ID']);
+if(!empty($_GET['ID']))
+  array_push($_SESSION['cart'], $_GET['ID']);
+
+$mysqli = mysqli_connect("localhost", "root", "", "sklep");
+
+if(!empty($_GET['empty'])){
+    $_SESSION['cart'] = array();
+}
 
 ?>
 
@@ -28,7 +34,7 @@ array_push($_SESSION['cart'], $_GET['ID']);
         </button>
         <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
           <div class="navbar-nav">
-            <a class="nav-link active" aria-current="page" href="index.html">Home</a>
+            <a class="nav-link active" aria-current="page" href="index.php">Home</a>
             <a class="nav-link" href="#">Features</a>
             <a class="nav-link" href="#">Pricing</a>          
           </div>
@@ -54,11 +60,21 @@ array_push($_SESSION['cart'], $_GET['ID']);
             Your products:
             <?php
               $where_in = implode(',', $_SESSION['cart']);
-              echo $where_in;
+              $sql = "SELECT * FROM produkty WHERE ID IN ($where_in)";
+              $result = mysqli_query($mysqli, $sql);
+              $total = 0;
+              $count = array_count_values($_SESSION['cart']);
+              if($result)
+              while($row = mysqli_fetch_array($result)){
+                $countId = $count[$row['id']];
+                echo "<p>". $countId . "x " . $row['nazwa']." - ".$countId * $row['cena']."zł</p>";
+                $total += $countId * $row['cena']; 
+              }
+              echo "Razem: " . $total . "zł";
             ?>
           </div>
           <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          <a href="index.php?empty=1" class="btn btn-secondary">Empty cart</a>
             <a href="checkout.php" class="btn btn-primary">Go to checkout</a>
           </div>
         </div>
