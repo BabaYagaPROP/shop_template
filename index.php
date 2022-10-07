@@ -35,8 +35,7 @@ if(!empty($_GET['empty'])){
         <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
           <div class="navbar-nav">
             <a class="nav-link active" aria-current="page" href="index.php">Home</a>
-            <a class="nav-link" href="#">Features</a>
-            <a class="nav-link" href="#">Pricing</a>          
+            <a class="nav-link" href="#">Contact</a>        
           </div>
         </div>
         <button type="button" class="btn btn-outline-secondary btn-lg" data-bs-toggle="modal" data-bs-target="#cartPopUp">
@@ -114,104 +113,35 @@ if(!empty($_GET['empty'])){
     <!--carousel end-->
       <!--grid contrainer which contains product cards-->
       <div class="grid_container">
-        <div class="card grid_item " style="width: 18rem;">
+      
+            <?php
+            $sql = "SELECT * FROM produkty";
+            $result = mysqli_query($mysqli, $sql);
+            if($result)
+            while($row = mysqli_fetch_array($result)){
+                echo "<div class='card grid_item' style='width: 18rem; '>";
 
-        <div class="card-body">
-          <h5 class="card-title">Card title</h5>
-          <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-          <a href="index.php?ID=1" class="btn btn-primary">Add to cart</a>
-        </div>
-        </div>
-        <div class="card grid_item" style="width: 18rem;">
-        <div class="card-body">
-          <h5 class="card-title">Card title</h5>
-          <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-          <a href="index.php?ID=2" class="btn btn-primary">Add to cart</a>
-        </div>
-        </div>
-        <div class="card grid_item" style="width: 18rem;">
-          <div class="card-body">
-            <h5 class="card-title">Card title</h5>
-            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-            <a href="index.php?ID=3" class="btn btn-primary">Add to cart</a>
-          </div>
-        </div>
-        <div class="card grid_item" style="width: 18rem;">
-          <div class="card-body">
-            <h5 class="card-title">Card title</h5>
-            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-            <a href="index.php?ID=4" class="btn btn-primary">Add to cart</a>
-          </div>
-        </div>
-        <div class="card grid_item" style="width: 18rem;">
-          <div class="card-body">
-            <h5 class="card-title">Card title</h5>
-            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-            <a href="index.php?ID=5" class="btn btn-primary">Add to cart</a>
-          </div>
-        </div>
-        <div class="card grid_item" style="width: 18rem;">
-          <div class="card-body">
-            <h5 class="card-title">Card title</h5>
-            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-            <a href="index.php?ID=6" class="btn btn-primary">Add to cart</a>
-          </div>
-        </div>
-        <div class="card grid_item" style="width: 18rem;">
-          <div class="card-body">
-            <h5 class="card-title">Card title</h5>
-            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-            <a href="index.php?ID=7" class="btn btn-primary">Add to cart</a>
-          </div>
-        </div>
-        <div class="card grid_item" style="width: 18rem;">
-          <div class="card-body">
-            <h5 class="card-title">Card title</h5>
-            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-            <a href="index.php?ID=8" class="btn btn-primary">Add to cart</a>
-          </div>
-        </div>
-        <div class="card grid_item" style="width: 18rem;">
-          <div class="card-body">
-            <h5 class="card-title">Card title</h5>
-            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-            <a href="index.php?ID=9" class="btn btn-primary">Add to cart</a>
-          </div>
-        </div>
-        <div class="card grid_item" style="width: 18rem;">
-          <div class="card-body">
-            <h5 class="card-title">Card title</h5>
-            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-            <a href="index.php?ID=10" class="btn btn-primary">Add to cart</a>
-          </div>
-        </div>
+                echo "<img src='img/".$row['zdjecie']."' class='rounded-2'  alt='...'>";
+                echo "<div class='card-body'>";
+                echo "<h5 class='card-title'>".$row['nazwa']."</h5>";
+                echo "<p class='card-text'>".$row['opis']."</p>";
+                echo "<p class='card-text'>".$row['cena']."zł</p>";
+                echo "<a href='index.php?ID=".$row['id']."' class='btn btn-primary'>Add to cart</a>";
+                echo "</div>";
+                echo "</div>";
+                
+            }
+            ?>
+      
       </div>
       <!-- Modal -->
-<div class="modal fade" id="owner" tabindex="-1" aria-labelledby="ownereLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Site is made by</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body">
-        ...
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-      </div>
-    </div>
-  </div>
-</div>
+
     </main>
 
     <!-- Footer -->
       <footer class=" text-center text-white mt-auto" style="background-color:#212529;">
         <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2)">
-          © 2022 Copyright: 
-          <a class="text-white" href="#" data-bs-toggle="modal" data-bs-target="#owner">
-            Launch demo modal
-          </a>
+          © 2022 Copyright: Launch demo modal
         </div>
       </footer>
       <!-- Footer -->
