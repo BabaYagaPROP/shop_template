@@ -1,0 +1,10 @@
+CREATE DATABASE `sklep` /*!40100 DEFAULT CHARACTER SET utf8mb4 */;
+
+CREATE TABLE `produkty` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `nazwa` varchar(45) DEFAULT NULL,
+  `zdjecie` varchar(45) DEFAULT NULL,
+  `opis` varchar(45) DEFAULT NULL,
+  `cena` float DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4;
