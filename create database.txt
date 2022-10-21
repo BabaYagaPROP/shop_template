@@ -6,5 +6,6 @@ CREATE TABLE `produkty` (
   `zdjecie` varchar(45) DEFAULT NULL,
   `opis` varchar(45) DEFAULT NULL,
   `cena` float DEFAULT NULL,
+  `promocja` float DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4;

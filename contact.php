@@ -87,74 +87,47 @@ if(!empty($_GET['empty'])){
         </div>
       </div>
     </div>
-    
-
-    <!--carousel-->
-      <div id="myCarousel" class="carousel slide" data-bs-ride="carousel">
-        <div class="carousel-inner">
-            <?php
-            $sql = "SELECT * FROM produkty where promocja is not null";
-            $result = mysqli_query($mysqli, $sql);
-            $i = 0;
-            if($result)
-            while($row = mysqli_fetch_array($result)){
-                if($i == 0){
-                    echo '<div class="carousel-item active">';
-                    echo '<div class="container">';
-                    $i++;
-                }else{
-                    echo '<div class="carousel-item">';
-                    echo '<div class="container">';
-                }
-                echo '<img src="img/'.$row['zdjecie'].'" class="w-5" alt="...">';
-                echo '<h5>'.$row['nazwa'].'</h5>';
-                echo '<p>'.$row['opis'].'</p>';
-                echo '<p><s>'.$row['cena'].'zł</s> '.$row['cena'] *($row['promocja'] / 100) . 'zł</p>';
-                echo '<a href="index.php?ID='.$row['id'].'" class="btn btn-primary">Add to cart</a>';
-                echo '</div>';
-                echo '</div>';
-            }
-            ?>
+    <div class="contactIMG">
+        <img src="img/test.jpg"  alt="test1">
+        <div class="contactRight">
+            <h1>Kontakt</h1>
+            <p>email: testemail@gmail.com</p>
+            <p>tel: 123456789</p>
         </div>
-        <button class="carousel-control-prev" type="button" data-bs-target="#myCarousel" data-bs-slide="prev">
-            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-            <span class="visually-hidden">Previous</span>
-          </button>
-          <button class="carousel-control-next" type="button" data-bs-target="#myCarousel" data-bs-slide="next">
-            <span class="carousel-control-next-icon" aria-hidden="true"></span>
-            <span class="visually-hidden">Next</span>
-          </button>
     </div>
-    <!--carousel end-->
-      <!--grid contrainer which contains product cards-->
-      <div class="grid_container">
-      
-            <?php
-            $sql = "SELECT * FROM produkty";
-            $result = mysqli_query($mysqli, $sql);
-            if($result)
-            while($row = mysqli_fetch_array($result)){
-                echo "<div class='card grid_item' style='width: 18rem; '>";
+<div class="container py-4">
 
-                echo "<img src='img/".$row['zdjecie']."' class='rounded-2'  alt='...'>";
-                echo "<div class='card-body'>";
-                echo "<h5 class='card-title'>".$row['nazwa']."</h5>";
-                echo "<p class='card-text'>".$row['opis']."</p>";
-                if($row['promocja'] != null){
-                    echo "<p><s>".$row['cena']."zł</s> ".$row['cena'] *($row['promocja'] / 100) . "zł</p>";
-                }
-                else
-                  echo "<p class='card-text'>".$row['cena']."zł</p>";
-                echo "<a href='index.php?ID=".$row['id']."' class='btn btn-primary'>Add to cart</a>";
-                echo "</div>";
-                echo "</div>";
-                
-            }
-            ?>
-      
-      </div>
-      <!-- Modal -->
+  <!-- Bootstrap 5 starter form -->
+  <form id="contactForm">
 
+    <!-- Name input -->
+    <div class="mb-3">
+      <label class="form-label" for="name">Name</label>
+      <input class="form-control" id="name" type="text" placeholder="Name" />
+    </div>
+
+    <!-- Email address input -->
+    <div class="mb-3">
+      <label class="form-label" for="emailAddress">Email Address</label>
+      <input class="form-control" id="emailAddress" type="email" placeholder="Email Address" />
+    </div>
+
+    <!-- Message input -->
+    <div class="mb-3">
+      <label class="form-label" for="message">Message</label>
+      <textarea class="form-control" id="message" type="text" placeholder="Message" style="height: 10rem;"></textarea>
+    </div>
+
+    <!-- Form submit button -->
+    <div class="d-grid">
+      <button class="btn btn-primary btn-lg" type="submit">Submit</button>
+    </div>
+
+  </form>
+
+</div>
+    
+     
     </main>
 
     <!-- Footer -->

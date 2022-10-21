@@ -1,5 +1,5 @@
 .carousel-item{
-    height: 40vh;
+    height: 45vh;
     min-height: 23rem;
     background: rgb(79, 93, 117);
     color:white;
@@ -7,10 +7,11 @@
 }
 .container{
     position:absolute;
-    top:50%;
+    top:57%;
     left:50%;
     transform:translate(-50%,-50%);
     text-align:center;
+    
 }
 
 main{
@@ -42,4 +43,15 @@ html{
 }
 #container{
     margin-top:50%;
+}
+.contactIMG{
+position: absolute;
+top:15%;
+left:16%;
+}
+.contactRight{
+    position: absolute;
+    top:10%;
+    left:150%;
+    width:300px;
 }

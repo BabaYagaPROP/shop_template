@@ -1,3 +1,20 @@
+<?php
+session_start();
+
+if(empty($_SESSION['cart'])){
+    $_SESSION['cart'] = array();
+}
+
+if(!empty($_GET['ID']))
+  array_push($_SESSION['cart'], $_GET['ID']);
+
+$mysqli = mysqli_connect("localhost", "root", "", "sklep");
+
+if(!empty($_GET['empty'])){
+    $_SESSION['cart'] = array();
+}
+
+?>
 <!doctype html>
 <html lang="pl">
   <head>
@@ -10,28 +27,28 @@
   <body class="d-flex flex-column min-vh-100">
      <!--navbar-->
      <nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark">
-        <div class="container-fluid">
-          <a class="navbar-brand" href="#">Navbar</a>
-          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-          </button>
-          <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-            <div class="navbar-nav">
-              <a class="nav-link active" aria-current="page" href="index.php">Home</a>
-              <a class="nav-link" href="#">Features</a>
-              <a class="nav-link" href="#">Pricing</a>          
-            </div>
-          </div>
-          <button type="button" class="btn btn-outline-secondary btn-lg" data-bs-toggle="modal" data-bs-target="#cartPopUp">
-            <img src="img/cart.svg" class="filter_white" alt="cart" width="30" height="24">
-            Cart
+      <div class="container-fluid">
+        <a class="navbar-brand" href="#">Navbar</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
         </button>
+        <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+          <div class="navbar-nav">
+            <a class="nav-link active" aria-current="page" href="index.php">Home</a>
+            <a class="nav-link" href="contact.php">Contact</a>        
+          </div>
         </div>
-      </nav>
+        <button type="button" class="btn btn-outline-secondary btn-lg" data-bs-toggle="modal" data-bs-target="#cartPopUp">
+          <img src="img/cart.svg" class="filter_white" alt="cart" width="30" height="24">
+          Cart
+      </button>
+      </div>
+    </nav>
     <!--main-->
     <main>
+
     <!--shopping cart pop up-->
-      <div class="modal fade" id="cartPopUp" tabindex="-1" aria-labelledby="cartPopUp" aria-hidden="true">
+      <<div class="modal fade" id="cartPopUp" tabindex="-1" aria-labelledby="cartPopUpLabel" aria-hidden="true">
       <div class="modal-dialog">
         <div class="modal-content">
           <div class="modal-header">
@@ -40,14 +57,36 @@
           </div>
           <div class="modal-body">
             Your products:
+            <?php
+              $where_in = implode(',', $_SESSION['cart']);
+              $sql = "SELECT * FROM produkty WHERE ID IN ($where_in)";
+              $result = mysqli_query($mysqli, $sql);
+              $total = 0;
+              $count = array_count_values($_SESSION['cart']);
+              if($result)
+              while($row = mysqli_fetch_array($result)){
+                $countId = $count[$row['id']];
+                if($row['promocja'] == null)
+                {
+                echo "<p>". $countId . "x " . $row['nazwa']." - ".$countId * $row['cena']."zł</p>";
+                $total += $countId * $row['cena']; 
+                }
+                else
+                {
+                echo "<p>". $countId . "x " . $row['nazwa']." - ".$row['cena'] * ($row['promocja'] /100)."zł</p>";
+                $total += $countId * $row['cena'] * ($row['promocja'] /100); 
+                }
+              }
+              echo "Razem: " . $total . "zł";
+            ?>
           </div>
           <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-            <a href="checkout.php" class="btn btn-primary">Go to checkout</a>
+          <a href="index.php?empty=1" class="btn btn-secondary">Empty cart</a>
           </div>
         </div>
       </div>
-      </div>
+    </div>
+
     <!--checkout-->
     <div class="form_container">
       <div class="col-md-8 order-md-1">
